@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Allison Zhou</title>
+  <meta name="description" content="Allison Zhou — designer, developer, and maker of curious things on the internet." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23ff5b3a'/></svg>" />
+</head>
+<body>
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+
+  <header class="topbar">
+    <a href="#/hello/" class="logo" data-cursor="home">
+      <span class="logo__dot"></span>allison zhou
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#/hello/" data-route="hello"><span>01</span>hello</a>
+      <a href="#/work/" data-route="work"><span>02</span>work</a>
+      <a href="#/about/" data-route="about"><span>03</span>about</a>
+      <a href="#/contact/" data-route="contact"><span>04</span>contact</a>
+    </nav>
+    <div class="clock mono" aria-label="Local time"><span id="clock">--:--</span></div>
+  </header>
+
+  <main id="app">
+    <!-- HELLO -->
+    <section class="view view--hello" data-view="hello" aria-labelledby="hello-title">
+      <p class="eyebrow mono">[ portfolio — vol. 2026 ]</p>
+      <h1 id="hello-title" class="display">
+        <span class="line"><span class="word">Hello,</span> <span class="word">I'm</span></span>
+        <span class="line"><em class="word serif">Allison</em> <span class="word">—</span></span>
+        <span class="line"><span class="word">I</span> <span class="word">make</span> <span class="word swap" id="swap">curious</span></span>
+        <span class="line"><span class="word">things</span> <span class="word">for</span> <span class="word">screens.</span></span>
+      </h1>
+      <div class="hello__foot fade">
+        <p class="lede">Designer &amp; developer building playful, thoughtful interfaces where code and craft meet. Move your cursor — the field is listening.</p>
+        <a href="#/work/" class="pill" data-cursor="view">see the work <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span>interaction design ✦ creative code ✦ web experiences ✦ generative art ✦ prototyping ✦ typography ✦&nbsp;</span>
+          <span>interaction design ✦ creative code ✦ web experiences ✦ generative art ✦ prototyping ✦ typography ✦&nbsp;</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section class="view view--work" data-view="work" aria-labelledby="work-title">
+      <div class="view__head">
+        <h2 id="work-title" class="display display--md">Selected <em class="serif">work</em></h2>
+        <p class="mono muted">(04) projects — hover to peek</p>
+      </div>
+      <ol class="work fade">
+        <li class="work__item" data-hue="12">
+          <a href="#/work/" data-cursor="open">
+            <span class="work__num mono">01</span>
+            <span class="work__title">Tidepool</span>
+            <span class="work__tags mono">web app · design system</span>
+            <span class="work__year mono">2026</span>
+          </a>
+        </li>
+        <li class="work__item" data-hue="200">
+          <a href="#/work/" data-cursor="open">
+            <span class="work__num mono">02</span>
+            <span class="work__title">Paper Moons</span>
+            <span class="work__tags mono">generative art · webgl</span>
+            <span class="work__year mono">2025</span>
+          </a>
+        </li>
+        <li class="work__item" data-hue="140">
+          <a href="#/work/" data-cursor="open">
+            <span class="work__num mono">03</span>
+            <span class="work__title">Field Notes</span>
+            <span class="work__tags mono">editorial · interaction</span>
+            <span class="work__year mono">2025</span>
+          </a>
+        </li>
+        <li class="work__item" data-hue="280">
+          <a href="#/work/" data-cursor="open">
+            <span class="work__num mono">04</span>
+            <span class="work__title">Small Hours</span>
+            <span class="work__tags mono">ios · prototyping</span>
+            <span class="work__year mono">2024</span>
+          </a>
+        </li>
+      </ol>
+      <div class="peek" aria-hidden="true"><canvas class="peek__canvas" width="360" height="240"></canvas></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="view view--about" data-view="about" aria-labelledby="about-title">
+      <div class="about">
+        <h2 id="about-title" class="display display--md">A little <em class="serif">about</em> me</h2>
+        <div class="about__body fade">
+          <p class="lede">I'm a designer who codes (or a coder who designs — it depends on the day). I care about the small moments: a hover that feels alive, a transition that explains itself, type that has room to breathe.</p>
+          <p>Right now I'm exploring how generative systems and motion can make the web feel less like a document and more like a place. Before this, I worked on products used by millions and prototypes used by exactly one person (me).</p>
+          <div class="facts">
+            <div><p class="mono muted">currently</p><p>Designing &amp; building independently</p></div>
+            <div><p class="mono muted">tools</p><p>Figma, JS/TS, WebGL, Canvas, Swift</p></div>
+            <div><p class="mono muted">off-screen</p><p>Film cameras, bouldering, dumplings</p></div>
+            <div><p class="mono muted">based in</p><p>Somewhere on Earth</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="view view--contact" data-view="contact" aria-labelledby="contact-title">
+      <p class="eyebrow mono">[ say hi ]</p>
+      <h2 id="contact-title" class="display">
+        <span class="line"><span class="word">Let's make</span></span>
+        <span class="line"><em class="word serif">something</em></span>
+        <span class="line"><span class="word">together.</span></span>
+      </h2>
+      <button class="email fade" type="button" data-email="hello@allisonzhou.com" data-cursor="copy">
+        hello@allisonzhou.com
+      </button>
+      <ul class="socials mono fade">
+        <li><a href="https://github.com/allisonzhou" target="_blank" rel="noopener" data-cursor="go">github ↗</a></li>
+        <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener" data-cursor="go">linkedin ↗</a></li>
+        <li><a href="https://www.instagram.com/" target="_blank" rel="noopener" data-cursor="go">instagram ↗</a></li>
+        <li><a href="https://read.cv/" target="_blank" rel="noopener" data-cursor="go">read.cv ↗</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="bottombar mono">
+    <span>© <span id="year">2026</span> allison zhou</span>
+    <button class="toggle" type="button" id="motion-toggle" aria-pressed="false">motion: on</button>
+    <span class="coords" id="coords">x 000 · y 000</span>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
