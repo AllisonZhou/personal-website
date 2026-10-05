@@ -1,142 +1,574 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Allison Zhou</title>
-  <meta name="description" content="Allison Zhou — designer, developer, and maker of curious things on the internet." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23ff5b3a'/></svg>" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Allison Zhou</title>
+<meta name="description" content="Allison Zhou: Statistical Science student at Cornell. Research in statistical modeling, machine learning and spatial data.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23020a24'/><text x='50' y='68' font-family='Arial Black,Arial' font-weight='900' font-size='50' text-anchor='middle' fill='%233d74ff'>AZ</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: dark-first editorial portfolio. Full-bleed condensed display type, hairline grid rules, a live binary field behind the hero, numbered experience index that expands in place, a skills marquee, giant contact footer. Contrast toggle flips to a light blue print. */
+:root {
+  --bg: #020a24;
+  --bg-2: #061238;
+  --fg: #e6eeff;
+  --muted: #8291bd;
+  --rule: rgba(150, 175, 255, .18);
+  --accent: #3d74ff;
+  --glow: #8fd3ff;
+  --display: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue Condensed", Impact, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) { --bg: #e8efff; --bg-2: #dbe5ff; --fg: #04103f; --muted: #4a5a8c; --rule: rgba(4, 16, 63, .16); --accent: #1442ff; --glow: #0a5bd6; color-scheme: light; }
+}
+:root[data-theme="light"] { --bg: #e8efff; --bg-2: #dbe5ff; --fg: #04103f; --muted: #4a5a8c; --rule: rgba(4, 16, 63, .16); --accent: #1442ff; --glow: #0a5bd6; color-scheme: light; }
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--mono); font-size: 15px; line-height: 1.65; overflow-x: hidden; }
+::selection { background: var(--accent); color: #fff; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--glow); outline-offset: 3px; }
+
+.gutter { padding-inline: clamp(16px, 3.2vw, 44px); }
+.rule { border-top: 1px solid var(--rule); }
+.label { font-size: 12px; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); }
+.accent { color: var(--accent); }
+
+/* nav */
+nav.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px;
+  padding-block: 14px; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule);
+  font-size: 12px; text-transform: uppercase; letter-spacing: .12em;
+}
+nav.top .mark { font-family: var(--display); font-weight: 900; font-size: 22px; letter-spacing: .02em; text-decoration: none; line-height: 1; }
+nav.top .links { display: flex; gap: 22px; }
+nav.top .links a { text-decoration: none; color: var(--muted); }
+nav.top .links a:hover { color: var(--fg); }
+nav.top .right { justify-self: end; display: flex; gap: 14px; align-items: center; }
+.toggle { font: inherit; color: var(--fg); background: none; border: 1px solid var(--rule); border-radius: 999px; padding: 5px 12px; cursor: pointer; display: inline-flex; gap: 8px; align-items: center; text-transform: uppercase; letter-spacing: .12em; }
+.toggle i { width: 10px; height: 10px; border-radius: 50%; background: linear-gradient(90deg, var(--fg) 50%, transparent 50%); border: 1px solid var(--fg); }
+.toggle:hover { border-color: var(--accent); }
+
+/* hero */
+.hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--rule); }
+#field { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero-inner { position: relative; padding-block: clamp(36px, 7vw, 90px) 28px; display: grid; gap: clamp(20px, 3vw, 36px); }
+.hero-meta { display: flex; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; }
+.hero h1 {
+  font-family: var(--display); font-weight: 900; text-transform: uppercase; margin: 0; line-height: .8; letter-spacing: -.01em;
+  font-size: clamp(76px, 19.2vw, 300px); display: grid;
+}
+.hero h1 .line { display: block; overflow: hidden; padding-bottom: .02em; }
+.hero h1 .line > span { display: inline-block; }
+.hero h1 .line:nth-child(2) { color: var(--accent); text-align: right; }
+.hero-foot { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto; gap: 20px 36px; align-items: end; }
+.hero-foot p { margin: 0; max-width: 46ch; }
+.big-cta {
+  font-family: var(--display); font-weight: 800; font-size: 26px; text-transform: uppercase; letter-spacing: .02em; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 12px; padding: 12px 22px; border-radius: 999px; background: var(--accent); color: #fff; white-space: nowrap;
+}
+.big-cta svg { width: 22px; height: 22px; transition: transform .25s; }
+.big-cta:hover svg { transform: translateX(4px) rotate(-45deg); }
+
+/* marquee */
+.marquee { overflow: hidden; border-bottom: 1px solid var(--rule); background: var(--accent); color: #fff; }
+.marquee-track { display: flex; width: max-content; will-change: transform; }
+.marquee span { font-family: var(--display); font-weight: 800; font-size: clamp(28px, 4.4vw, 56px); text-transform: uppercase; padding: 10px 0; white-space: nowrap; line-height: 1.1; }
+.marquee span::after { content: "✳"; margin: 0 .5em; font-size: .6em; vertical-align: .25em; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* sections */
+section { padding-block: clamp(48px, 8vw, 110px); border-bottom: 1px solid var(--rule); overflow-x: clip; }
+.sec-head { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 16px; margin-bottom: clamp(26px, 4vw, 48px); }
+.sec-head h2 { font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: clamp(44px, 12.5vw, 190px); line-height: .82; margin: 0; letter-spacing: -.005em; overflow-wrap: anywhere; }
+.sec-head .label { text-align: right; padding-bottom: .6em; }
+
+.about-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 32px clamp(28px, 5vw, 80px); }
+.statement { font-family: var(--display); font-weight: 700; font-size: clamp(30px, 3.6vw, 52px); line-height: 1.02; text-transform: uppercase; margin: 0; text-wrap: balance; }
+.statement em { font-style: normal; color: var(--accent); }
+.about-copy { display: grid; gap: 16px; align-content: start; }
+.about-copy p { margin: 0; max-width: 62ch; }
+
+.counters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: clamp(40px, 6vw, 72px); border-top: 1px solid var(--rule); }
+.counter { padding: 20px 18px 6px 0; display: grid; gap: 4px; border-right: 1px solid var(--rule); padding-left: 18px; }
+.counter:first-child { padding-left: 0; }
+.counter:last-child { border-right: 0; }
+.counter b { font-family: var(--display); font-weight: 900; font-size: clamp(44px, 6vw, 88px); line-height: .9; font-variant-numeric: tabular-nums; }
+.counter span { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; line-height: 1.4; }
+
+/* recognition table */
+.table { display: grid; }
+.row { display: grid; grid-template-columns: 120px minmax(0, 1fr) auto; gap: 8px 24px; align-items: baseline; padding-block: 16px; border-top: 1px solid var(--rule); }
+.row:last-child { border-bottom: 1px solid var(--rule); }
+.row .what { font-family: var(--display); font-weight: 800; font-size: clamp(24px, 3vw, 38px); text-transform: uppercase; line-height: 1; }
+.row .who { color: var(--muted); text-align: right; }
+
+/* work index */
+.index { display: grid; border-top: 1px solid var(--rule); }
+details.job { border-bottom: 1px solid var(--rule); }
+details.job summary {
+  list-style: none; cursor: pointer; display: grid; grid-template-columns: 110px minmax(0, 1fr) minmax(0, 260px) 36px; gap: 8px 24px; align-items: center;
+  padding-block: 18px; position: relative;
+}
+details.job summary::-webkit-details-marker { display: none; }
+details.job summary::before { content: ""; position: absolute; inset: 0 calc(-1 * clamp(16px, 3.2vw, 44px)); background: var(--accent); transform: scaleY(0); transform-origin: bottom; transition: transform .35s cubic-bezier(.7,0,.2,1); z-index: -1; }
+details.job summary:hover::before, details.job[open] summary::before { transform: scaleY(1); }
+details.job summary:hover, details.job[open] summary { color: #fff; }
+details.job summary:hover .code, details.job[open] summary .code, details.job summary:hover .org, details.job[open] summary .org { color: rgba(255,255,255,.8); }
+.job { position: relative; z-index: 0; }
+.code { font-size: 12px; color: var(--muted); letter-spacing: .06em; }
+.job h3 { font-family: var(--display); font-weight: 800; font-size: clamp(30px, 4.6vw, 64px); line-height: .92; text-transform: uppercase; margin: 0; }
+.org { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.plus { width: 30px; height: 30px; border: 1px solid currentColor; border-radius: 50%; position: relative; justify-self: end; }
+.plus::before, .plus::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 1.5px; background: currentColor; transform: translate(-50%, -50%); transition: transform .3s; }
+.plus::after { transform: translate(-50%, -50%) rotate(90deg); }
+details[open] .plus::after { transform: translate(-50%, -50%) rotate(0deg); }
+.job-body { display: grid; grid-template-columns: 110px minmax(0, 1fr) minmax(0, 260px) 36px; gap: 8px 24px; padding-block: 22px 30px; }
+.job-body > div { grid-column: 2; display: grid; gap: 12px; }
+.job-body p { margin: 0; max-width: 64ch; }
+.job-body aside { grid-column: 3; display: flex; flex-wrap: wrap; gap: 6px; align-content: start; }
+.tag { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; border: 1px solid var(--rule); border-radius: 999px; padding: 2px 10px; }
+blockquote { margin: 0; padding-left: 14px; border-left: 2px solid var(--accent); font-style: italic; color: var(--muted); }
+
+.spec { grid-column: 2; margin: 0; display: grid; gap: 14px; }
+.spec div { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 4px 18px; }
+.spec dt { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--accent); padding-top: 3px; }
+.spec dd { margin: 0; max-width: 64ch; }
+.job-body aside .label { width: 100%; }
+@media (max-width: 820px) { .spec { grid-column: 1; } .spec div { grid-template-columns: minmax(0, 1fr); } }
+
+
+/* moving name: each letter stretches toward the cursor */
+.hero h1 .line { will-change: transform; }
+.hero h1 .ch { display: inline-block; transform-origin: 50% 100%; will-change: transform; transition: color .3s; }
+.hero h1 .ch.hot { color: var(--glow); }
+.hero h1 .line:nth-child(2) .ch.hot { color: var(--fg); }
+
+/* 3D project carousel */
+.orbit-wrap { position: relative; margin-bottom: clamp(36px, 6vw, 72px); }
+.orbit-stage { position: relative; height: var(--stage-h, 460px); perspective: 1600px; overflow: hidden; cursor: grab; touch-action: pan-y; user-select: none; }
+.orbit-stage:active { cursor: grabbing; }
+.orbit { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+.pcard {
+  position: absolute; width: var(--card-w, 280px); height: var(--card-h, 360px); left: calc(var(--card-w, 280px) / -2); top: calc(var(--card-h, 360px) / -2);
+  background: var(--bg-2); border: 1px solid var(--rule); border-radius: 18px; padding: 20px; display: grid; grid-template-rows: auto 1fr auto auto; gap: 10px;
+  backface-visibility: hidden; color: var(--fg); text-align: left; font: inherit; cursor: pointer; overflow: hidden;
+}
+.pcard::before { content: ""; position: absolute; inset: 0; background: radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--accent) 38%, transparent), transparent 60%); pointer-events: none; }
+.pcard.front { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 24px 60px color-mix(in srgb, var(--accent) 35%, transparent); }
+.pcard .num { font-family: var(--display); font-weight: 900; font-size: 120px; line-height: .8; color: var(--accent); position: relative; }
+.pcard h4 { font-family: var(--display); font-weight: 800; font-size: 34px; line-height: .92; text-transform: uppercase; margin: 0; position: relative; align-self: end; }
+.pcard .org { position: relative; font-size: 11px; }
+.pcard .chips { display: flex; flex-wrap: wrap; gap: 5px; position: relative; }
+.pcard .chips span { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; border: 1px solid var(--rule); border-radius: 999px; padding: 1px 8px; }
+.pcard .code { position: absolute; top: 20px; right: 20px; }
+.orbit-ui { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; padding-top: 14px; }
+.orbit-ui .now { font-family: var(--display); font-weight: 800; font-size: clamp(22px, 2.6vw, 32px); text-transform: uppercase; line-height: 1; }
+.orbit-btns { display: flex; gap: 8px; }
+.orbit-btns button { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--fg); background: none; color: var(--fg); cursor: pointer; font: inherit; font-size: 18px; }
+.orbit-btns button:hover { background: var(--fg); color: var(--bg); }
+.drag-hint { position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); pointer-events: none; }
+
+/* scroll-driven heading slide */
+.sec-head h2 { will-change: transform; }
+.big-cta { will-change: transform; transition: transform .25s cubic-bezier(.2,.8,.2,1); }
+
+
+/* resume */
+.ghost-cta { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; text-decoration: none; border: 1px solid var(--fg); border-radius: 999px; padding: 14px 22px; white-space: nowrap; align-self: center; }
+.ghost-cta:hover { background: var(--fg); color: var(--bg); }
+.hero-foot { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto auto; }
+.sheet { background: var(--bg-2); border: 1px solid var(--rule); border-radius: 18px; padding: clamp(20px, 4vw, 48px); display: grid; gap: 28px; }
+.sheet-top { display: flex; justify-content: space-between; gap: 10px 24px; flex-wrap: wrap; align-items: baseline; padding-bottom: 18px; border-bottom: 1px solid var(--rule); }
+.sheet-top b { font-family: var(--display); font-weight: 900; font-size: clamp(34px, 5vw, 60px); line-height: .9; text-transform: uppercase; }
+.rgroup { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 10px 32px; }
+.rgroup > h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .14em; color: var(--accent); margin: 4px 0 0; font-weight: 600; }
+.rgroup > div { display: grid; gap: 18px; min-width: 0; }
+.ritem { display: grid; gap: 2px; }
+.ritem .head { display: flex; justify-content: space-between; gap: 4px 16px; flex-wrap: wrap; }
+.ritem strong { font-weight: 600; }
+.ritem .when { font-size: 12px; color: var(--muted); letter-spacing: .06em; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.ritem em { font-style: normal; color: var(--muted); font-size: 13px; }
+.ritem ul { margin: 4px 0 0; padding-left: 18px; display: grid; gap: 2px; }
+.ritem li::marker { color: var(--accent); }
+@media (max-width: 820px) { .rgroup { grid-template-columns: minmax(0, 1fr); } .hero-foot { grid-template-columns: minmax(0, 1fr); } .ghost-cta { justify-self: start; } }
+
+/* contact */
+.contact { padding-block: clamp(56px, 9vw, 130px) 28px; border-bottom: 0; }
+.contact .label { display: block; margin-bottom: 18px; }
+.mega { font-family: var(--display); font-weight: 900; text-transform: uppercase; line-height: .8; margin: 0; font-size: clamp(90px, 25vw, 400px); letter-spacing: -.01em; }
+.mega .accent { display: inline-block; }
+.contact-row { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; justify-content: space-between; margin-top: clamp(26px, 4vw, 44px); padding-top: 20px; border-top: 1px solid var(--rule); }
+.email { font-family: var(--display); font-weight: 800; font-size: clamp(28px, 4.4vw, 60px); text-transform: lowercase; line-height: 1; user-select: all; overflow-wrap: anywhere; }
+.copy { font: inherit; font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--fg); background: none; border: 1px solid var(--fg); border-radius: 999px; padding: 9px 18px; cursor: pointer; }
+.copy:hover { background: var(--fg); color: var(--bg); }
+.socials { display: flex; gap: 20px; font-size: 12px; text-transform: uppercase; letter-spacing: .12em; }
+footer { display: flex; justify-content: space-between; gap: 10px 24px; flex-wrap: wrap; padding-block: 22px 30px; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .12em; }
+
+/* cursor */
+.cursor { position: fixed; left: 0; top: 0; width: 14px; height: 14px; border-radius: 50%; background: #fff; mix-blend-mode: difference; pointer-events: none; z-index: 50; transform: translate(-50%, -50%); transition: width .2s, height .2s; opacity: 0; }
+.cursor.big { width: 54px; height: 54px; }
+
+/* load-in: starts visible, only position moves */
+@media (prefers-reduced-motion: no-preference) {
+  .hero h1 .line > .word { animation: up .9s cubic-bezier(.2,.8,.2,1) both; }
+  .hero h1 .line:nth-child(2) > .word { animation-delay: .08s; }
+  @keyframes up { from { transform: translateY(32%); } to { transform: none; } }
+}
+
+
+@media (max-width: 820px) {
+  nav.top { grid-template-columns: 1fr auto; }
+  nav.top .links { display: none; }
+  .hero-foot { grid-template-columns: minmax(0, 1fr); }
+  .about-grid { grid-template-columns: minmax(0, 1fr); }
+  .counters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .counter:nth-child(2) { border-right: 0; }
+  .counter:nth-child(3) { padding-left: 0; }
+  .counter:nth-child(n+3) { border-top: 1px solid var(--rule); }
+  .row { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .row .who { text-align: left; }
+  details.job summary { grid-template-columns: minmax(0, 1fr) 36px; }
+  details.job summary .code { grid-column: 1 / -1; }
+  details.job summary .org { grid-column: 1; }
+  details.job summary .plus { grid-row: 2; grid-column: 2; }
+  .job-body { grid-template-columns: minmax(0, 1fr); }
+  .job-body > div, .job-body aside { grid-column: 1; }
+  .sec-head { grid-template-columns: minmax(0, 1fr); }
+  .sec-head .label { text-align: left; padding-bottom: 0; }
+}
+</style>
 </head>
 <body>
+
+<nav class="top gutter" aria-label="Main">
+  <a class="mark" href="#top">AZ</a>
+  <div class="links"><a href="#about">About</a><a href="#work">Work</a><a href="#recognition">Recognition</a><a href="#resume">Resume</a><a href="#contact">Contact</a></div>
+  <div class="right"><button class="toggle" id="toggle" type="button" aria-label="Change contrast"><i aria-hidden="true"></i>Contrast</button></div>
+</nav>
+
+<header class="hero" id="top">
   <canvas id="field" aria-hidden="true"></canvas>
-  <div class="grain" aria-hidden="true"></div>
-  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+  <div class="hero-inner gutter">
+    <div class="hero-meta label">
+      <span>Statistical Science + Computer Science</span>
+      <span>Cornell University · Class of 2030</span>
+    </div>
+    <h1 aria-label="Allison Zhou"><span class="line" data-drift="-1"><span class="word" aria-hidden="true">Allison</span></span><span class="line" data-drift="1"><span class="word" aria-hidden="true">Zhou</span></span></h1>
+    <div class="hero-foot">
+      <p>Statistical modeling, machine learning and spatial data in Python. I find the signal in messy datasets and test whether it holds up.</p>
+      <p class="label">Open to internships, research and project teams</p>
+      <a class="ghost-cta" href="#resume">Resume</a>
+      <a class="big-cta" href="#contact">Say hi <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</header>
 
-  <header class="topbar">
-    <a href="#/hello/" class="logo" data-cursor="home">
-      <span class="logo__dot"></span>allison zhou
-    </a>
-    <nav class="nav" aria-label="Primary">
-      <a href="#/hello/" data-route="hello"><span>01</span>hello</a>
-      <a href="#/work/" data-route="work"><span>02</span>work</a>
-      <a href="#/about/" data-route="about"><span>03</span>about</a>
-      <a href="#/contact/" data-route="contact"><span>04</span>contact</a>
-    </nav>
-    <div class="clock mono" aria-label="Local time"><span id="clock">--:--</span></div>
-  </header>
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Python</span><span>Regression</span><span>Machine learning</span><span>GIS</span><span>Power BI</span><span>Java</span><span>HTML</span><span>Blender</span><span>Public speaking</span>
+    <span>Python</span><span>Regression</span><span>Machine learning</span><span>GIS</span><span>Power BI</span><span>Java</span><span>HTML</span><span>Blender</span><span>Public speaking</span>
+  </div>
+</div>
 
-  <main id="app">
-    <!-- HELLO -->
-    <section class="view view--hello" data-view="hello" aria-labelledby="hello-title">
-      <p class="eyebrow mono">[ portfolio — vol. 2026 ]</p>
-      <h1 id="hello-title" class="display">
-        <span class="line"><span class="word">Hello,</span> <span class="word">I'm</span></span>
-        <span class="line"><em class="word serif">Allison</em> <span class="word">—</span></span>
-        <span class="line"><span class="word">I</span> <span class="word">make</span> <span class="word swap" id="swap">curious</span></span>
-        <span class="line"><span class="word">things</span> <span class="word">for</span> <span class="word">screens.</span></span>
-      </h1>
-      <div class="hello__foot fade">
-        <p class="lede">Designer &amp; developer building playful, thoughtful interfaces where code and craft meet. Move your cursor — the field is listening.</p>
-        <a href="#/work/" class="pill" data-cursor="view">see the work <span aria-hidden="true">→</span></a>
-      </div>
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee__track">
-          <span>interaction design ✦ creative code ✦ web experiences ✦ generative art ✦ prototyping ✦ typography ✦&nbsp;</span>
-          <span>interaction design ✦ creative code ✦ web experiences ✦ generative art ✦ prototyping ✦ typography ✦&nbsp;</span>
-        </div>
-      </div>
-    </section>
+<section id="about" class="gutter">
+  <div class="sec-head"><h2>About</h2><span class="label">01 / Who I am</span></div>
+  <div class="about-grid">
+    <p class="statement">Every dataset tells two stories. <em>One from the model,</em> and one about the people behind it.</p>
+    <div class="about-copy">
+      <p>I'm Allison, a Statistical Science and Computer Science major at Cornell, from the San Francisco Bay Area.</p>
+      <p>My work sits where statistics meets code: building regression and machine learning models in Python, engineering spatial features with GIS, wiring up sensors, and turning the output into dashboards people can act on.</p>
+      <p>I've published research on housing prices, measured air pollution in my own community, studied human bias with an AI team at Carnegie Mellon, and planned food systems for Mars at NASA.</p>
+    </div>
+  </div>
+  <div class="counters">
+    <div class="counter"><b data-count="21612">21,612</b><span>Homes modeled in my published study</span></div>
+    <div class="counter"><b data-count="150" data-suffix="+">150+</b><span>Students reached through WiDS events</span></div>
+    <div class="counter"><b data-count="1">1</b><span>Peer-reviewed paper accepted</span></div>
+    <div class="counter"><b data-count="2">2</b><span>Awards for research and leadership</span></div>
+  </div>
+</section>
 
-    <!-- WORK -->
-    <section class="view view--work" data-view="work" aria-labelledby="work-title">
-      <div class="view__head">
-        <h2 id="work-title" class="display display--md">Selected <em class="serif">work</em></h2>
-        <p class="mono muted">(04) projects — hover to peek</p>
-      </div>
-      <ol class="work fade">
-        <li class="work__item" data-hue="12">
-          <a href="#/work/" data-cursor="open">
-            <span class="work__num mono">01</span>
-            <span class="work__title">Tidepool</span>
-            <span class="work__tags mono">web app · design system</span>
-            <span class="work__year mono">2026</span>
-          </a>
-        </li>
-        <li class="work__item" data-hue="200">
-          <a href="#/work/" data-cursor="open">
-            <span class="work__num mono">02</span>
-            <span class="work__title">Paper Moons</span>
-            <span class="work__tags mono">generative art · webgl</span>
-            <span class="work__year mono">2025</span>
-          </a>
-        </li>
-        <li class="work__item" data-hue="140">
-          <a href="#/work/" data-cursor="open">
-            <span class="work__num mono">03</span>
-            <span class="work__title">Field Notes</span>
-            <span class="work__tags mono">editorial · interaction</span>
-            <span class="work__year mono">2025</span>
-          </a>
-        </li>
-        <li class="work__item" data-hue="280">
-          <a href="#/work/" data-cursor="open">
-            <span class="work__num mono">04</span>
-            <span class="work__title">Small Hours</span>
-            <span class="work__tags mono">ios · prototyping</span>
-            <span class="work__year mono">2024</span>
-          </a>
-        </li>
-      </ol>
-      <div class="peek" aria-hidden="true"><canvas class="peek__canvas" width="360" height="240"></canvas></div>
-    </section>
+<section id="work" class="gutter">
+  <div class="sec-head"><h2>Work</h2><span class="label">02 / Research &amp; experience · 07 entries</span></div>
+  <div class="orbit-wrap" id="orbit-wrap">
+    <div class="orbit-stage" id="stage" aria-label="Project carousel. Drag, scroll or use the arrows to spin; click a card to read it.">
+      <div class="orbit" id="orbit"></div>
+      <span class="drag-hint label">← Drag to spin →</span>
+    </div>
+    <div class="orbit-ui"><span class="now" id="orbit-now"></span><div class="orbit-btns"><button type="button" id="prev" aria-label="Previous project">←</button><button type="button" id="next" aria-label="Next project">→</button></div></div>
+  </div>
+  <div class="index">
+    <details class="job" open>
+      <summary><span class="code">#AZ-001 / 07</span><h3>School density &amp; home prices</h3><span class="org">Published research · Cal State</span><span class="plus" aria-hidden="true"></span></summary>
+      <div class="job-body"><dl class="spec"><div><dt>Problem</dt><dd>Prior hedonic housing models priced in school quality (test scores, GPAs, charter status) but never the number of schools nearby. Was school density a missing variable?</dd></div><div><dt>Method</dt><dd>Built a dataset of 21,612 King County, WA home sales. Used GIS to geocode schools and engineer a new feature: the count of schools within a 10-mile radius of each home. Estimated regression and machine learning models in Python with school density added on top of every established control.</dd></div><div><dt>Result</dt><dd>School density was statistically significant over and above all existing factors. Paper accepted by the International Journal of Information and Decision Sciences; CSUPOM Conference Student Recognition Award.</dd></div></dl><aside><span class="label">Stack</span><span class="tag">Python</span><span class="tag">GIS</span><span class="tag">Regression</span><span class="tag">Machine learning</span><span class="tag">Feature engineering</span></aside></div>
+    </details>
+    <details class="job">
+      <summary><span class="code">#AZ-002 / 07</span><h3>Human bias in truck inspections</h3><span class="org">Carnegie Mellon · Research assistant</span><span class="plus" aria-hidden="true"></span></summary>
+      <div class="job-body"><dl class="spec"><div><dt>Problem</dt><dd>AI systems for safety-critical industrial truck inspections learn from human-labeled data, and human inspectors carry bias.</dd></div><div><dt>Method</dt><dd>Analyzed vehicle-inspection data from California and Pennsylvania with a team of CMU doctoral and undergraduate researchers, applying machine learning models to train AI on human pattern recognition and drawing on behavioral-science concepts about AI reliability in safety-related settings.</dd></div><div><dt>Result</dt><dd>Found that modeling alone was limited: accounting for human inspection behavior improved the data and the efficacy of the inspection models.</dd></div></dl><aside><span class="label">Stack</span><span class="tag">Machine learning</span><span class="tag">Behavioral data</span><span class="tag">Data collection</span></aside></div>
+    </details>
+    <details class="job">
+      <summary><span class="code">#AZ-003 / 07</span><h3>Feeding astronauts on Mars</h3><span class="org">NASA Ames · Intern</span><span class="plus" aria-hidden="true"></span></summary>
+      <div class="job-body"><dl class="spec"><div><dt>Problem</dt><dd>Closed-loop food systems for future Martian habitats need protein sources that are sustainable, nutritious and varied enough to prevent food monotony.</dd></div><div><dt>Method</dt><dd>Researched and modeled food production approaches for the Mars City 3D project: hydroponics, aquaponics, microbial proteins, regenerative agriculture and advanced irrigation. Designed food models to sustain a crew.</dd></div><div><dt>Result</dt><dd>Worked with a team of 11 interns and presented to 100+ NASA scientists. Voted by teammates for the Outstanding Leadership / Diligence Award.</dd></div></dl><aside><span class="label">Stack</span><span class="tag">Systems design</span><span class="tag">Literature review</span><span class="tag">Technical presenting</span></aside></div>
+    </details>
+    <details class="job">
+      <summary><span class="code">#AZ-004 / 07</span><h3>Air quality in Alviso</h3><span class="org">CP Mentorship · Team modeler</span><span class="plus" aria-hidden="true"></span></summary>
+      <div class="job-body"><dl class="spec"><div><dt>Problem</dt><dd>Alviso, one of the most polluted and least monitored areas in the Bay Area, had little local air and water quality data.</dd></div><div><dt>Method</dt><dd>Installed and helped program air and water quality sensors in residents' backyards. As team modeler, cleaned and analyzed the readings and built a Power BI dashboard to make the data readable for residents.</dd></div><div><dt>Result</dt><dd>Two years of community data, presented to the city council at Google.</dd></div></dl><aside><span class="label">Stack</span><span class="tag">Sensors</span><span class="tag">Power BI</span><span class="tag">Data cleaning</span><span class="tag">Data visualization</span></aside></div>
+    </details>
+    <details class="job">
+      <summary><span class="code">#AZ-005 / 07</span><h3>Data science for middle schoolers</h3><span class="org">Women in Data Science · NextGen</span><span class="plus" aria-hidden="true"></span></summary>
+      <div class="job-body"><dl class="spec"><div><dt>Problem</dt><dd>Middle schoolers near me had no hands-on path into data science.</dd></div><div><dt>Method</dt><dd>As one of WiDS Bay Area's first high school interns, helped organize Python tutorials, Excel lessons and youth Datathons, recruited speakers and mentors from tech and finance, and guided students through a Kaggle competition.</dd></div><div><dt>Result</dt><dd>Reached 150+ students, including a full-day Datathon at Santa Clara University.</dd></div></dl><aside><span class="label">Stack</span><span class="tag">Python</span><span class="tag">Data analytics</span><span class="tag">Curriculum design</span></aside></div>
+    </details>
+    <details class="job">
+      <summary><span class="code">#AZ-006 / 07</span><h3>Audience analytics</h3><span class="org">Opera San Jose · Marketing</span><span class="plus" aria-hidden="true"></span></summary>
+      <div class="job-body"><dl class="spec"><div><dt>Problem</dt><dd>Opera San Jose needed to understand its audience to target marketing and fundraising.</dd></div><div><dt>Method</dt><dd>Ran Google Ads campaigns, surveyed patrons at performances and analyzed the resulting audience data.</dd></div><div><dt>Result</dt><dd>Insights informed the organization's fundraising and KPI strategy.</dd></div></dl><aside><span class="label">Stack</span><span class="tag">Google Ads</span><span class="tag">Survey design</span><span class="tag">Audience analytics</span></aside></div>
+    </details>
+    <details class="job">
+      <summary><span class="code">#AZ-007 / 07</span><h3>Company website</h3><span class="org">ECOLAB · Intern</span><span class="plus" aria-hidden="true"></span></summary>
+      <div class="job-body"><dl class="spec"><div><dt>Built</dt><dd>A company website, using HTML for the front end and Python.</dd></div></dl><aside><span class="label">Stack</span><span class="tag">HTML</span><span class="tag">Python</span></aside></div>
+    </details>
+  </div>
+</section>
 
-    <!-- ABOUT -->
-    <section class="view view--about" data-view="about" aria-labelledby="about-title">
-      <div class="about">
-        <h2 id="about-title" class="display display--md">A little <em class="serif">about</em> me</h2>
-        <div class="about__body fade">
-          <p class="lede">I'm a designer who codes (or a coder who designs — it depends on the day). I care about the small moments: a hover that feels alive, a transition that explains itself, type that has room to breathe.</p>
-          <p>Right now I'm exploring how generative systems and motion can make the web feel less like a document and more like a place. Before this, I worked on products used by millions and prototypes used by exactly one person (me).</p>
-          <div class="facts">
-            <div><p class="mono muted">currently</p><p>Designing &amp; building independently</p></div>
-            <div><p class="mono muted">tools</p><p>Figma, JS/TS, WebGL, Canvas, Swift</p></div>
-            <div><p class="mono muted">off-screen</p><p>Film cameras, bouldering, dumplings</p></div>
-            <div><p class="mono muted">based in</p><p>Somewhere on Earth</p></div>
-          </div>
-        </div>
-      </div>
-    </section>
+<section id="recognition" class="gutter">
+  <div class="sec-head"><h2>Recognition</h2><span class="label">03 / Papers &amp; awards</span></div>
+  <div class="table">
+    <div class="row"><span class="label">Paper</span><span class="what">Accepted for publication</span><span class="who">Int'l Journal of Information &amp; Decision Sciences</span></div>
+    <div class="row"><span class="label">Award</span><span class="what">Student Recognition Award</span><span class="who">CSUPOM Conference</span></div>
+    <div class="row"><span class="label">Award</span><span class="what">Outstanding Leadership / Diligence</span><span class="who">NASA Ames · voted by teammates</span></div>
+    <div class="row"><span class="label">Role</span><span class="what">Vice President</span><span class="who">Women in Finance</span></div>
+  </div>
+</section>
 
-    <!-- CONTACT -->
-    <section class="view view--contact" data-view="contact" aria-labelledby="contact-title">
-      <p class="eyebrow mono">[ say hi ]</p>
-      <h2 id="contact-title" class="display">
-        <span class="line"><span class="word">Let's make</span></span>
-        <span class="line"><em class="word serif">something</em></span>
-        <span class="line"><span class="word">together.</span></span>
-      </h2>
-      <button class="email fade" type="button" data-email="hello@allisonzhou.com" data-cursor="copy">
-        hello@allisonzhou.com
-      </button>
-      <ul class="socials mono fade">
-        <li><a href="https://github.com/allisonzhou" target="_blank" rel="noopener" data-cursor="go">github ↗</a></li>
-        <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener" data-cursor="go">linkedin ↗</a></li>
-        <li><a href="https://www.instagram.com/" target="_blank" rel="noopener" data-cursor="go">instagram ↗</a></li>
-        <li><a href="https://read.cv/" target="_blank" rel="noopener" data-cursor="go">read.cv ↗</a></li>
-      </ul>
-    </section>
-  </main>
+<section id="resume" class="gutter">
+  <div class="sec-head"><h2>Resume</h2><span class="label">04 / The one-page version</span></div>
+  <div class="sheet">
+    <div class="sheet-top"><b>Allison Zhou</b><span class="label">az578@cornell.edu · linkedin.com/in/allisonjzhou</span></div>
+    <div class="rgroup"><h3>Education</h3><div><div class="ritem"><div class="head"><strong>Cornell University, College of Arts &amp; Sciences</strong><span class="when">Expected May 2030</span></div><em>Ithaca, NY</em><ul><li>B.A., Intended Statistical Science · Minor: Applied Economics</li></ul></div><div class="ritem"><div class="head"><strong>Monte Vista High School</strong><span class="when">June 2026</span></div><em>Danville, CA</em><ul><li>GPA 3.86 / 4.00 · ACT 35 · Honor Roll all 4 years</li><li>Coursework: AP Calculus BC, AP Computer Science A, AP Statistics</li></ul></div><div class="ritem"><div class="head"><strong>Diablo Valley College</strong><span class="when">Summer 2024</span></div><em>San Ramon, CA</em><ul><li>Analytical Geometry &amp; Calculus II</li></ul></div><div class="ritem"><div class="head"><strong>University of California, Berkeley</strong><span class="when">Summer 2023</span></div><em>Berkeley, CA</em><ul><li>Audited: Data Analysis and Economics II</li></ul></div></div></div>
+    <div class="rgroup"><h3>Experience</h3><div><div class="ritem"><div class="head"><strong>Carnegie Mellon University</strong><span class="when">Jul 2025 – Nov 2025</span></div><em>Research Assistant · Pittsburgh, PA</em><ul><li>Worked with a research team studying AI, human bias and vehicle inspection to train AI on data based on human pattern recognition</li><li>Analyzed vehicle-inspection data from California and Pennsylvania and applied machine learning models to connect humans and AI</li><li>Applied behavioral-science concepts to questions of AI reliability in safety-related settings</li></ul></div><div class="ritem"><div class="head"><strong>NASA Ames Research Center</strong><span class="when">Jun 2025 – Aug 2025</span></div><em>Summer Intern · Mountain View, CA</em><ul><li>Researched food and nourishment systems for future Martian habitats as part of the Mars City 3D project</li><li>Explored closed-loop food production: hydroponics, aquaponics, microbial proteins and advanced irrigation</li><li>Worked with a team of 11 interns on a presentation for 100+ NASA scientists</li><li>Received the Outstanding Leadership and Diligence Award</li></ul></div><div class="ritem"><div class="head"><strong>Independent Research with a CSU Data Science Professor</strong><span class="when">Jan 2024 – Sep 2025</span></div><em>Researcher and Co-Author</em><ul><li>Studied the relationship between school density and housing values using data from 20,000+ homes in King County, WA</li><li>Used regression and machine learning models to examine school density alongside traditional education measures</li><li>Presented at CSUPOM 2024; co-authored a paper accepted by the International Journal of Information and Decision Sciences</li></ul></div><div class="ritem"><div class="head"><strong>Women in Data Science (WiDS) Bay Area</strong><span class="when">Jan 2024 – Present</span></div><em>Ambassador and Intern</em><ul><li>Helped organize Python tutorials, Excel lessons and youth Datathons for 150+ students as one of the first high school interns</li><li>Supported events at Dorris-Eaton School and Santa Clara University, including a full-day Datathon</li><li>Recruited guest speakers and mentors from tech and finance; guided students through a Kaggle competition</li></ul></div><div class="ritem"><div class="head"><strong>CP Mentorship</strong><span class="when">Sep 2023 – Jun 2025</span></div><em>Intern · San Jose, CA</em><ul><li>Helped install and program air-quality sensors in Alviso for continuous environmental data collection</li><li>Built a Power BI dashboard to organize and visualize local environmental data; presented findings at Google</li><li>Conducted and analyzed survey data for an Opera San Jose fundraising-strategy project</li></ul></div></div></div>
+    <div class="rgroup"><h3>Leadership</h3><div><div class="ritem"><div class="head"><strong>Students4STEM Club</strong><span class="when">Aug 2024 – Jun 2026</span></div><em>President</em><ul><li>Planned and led five outreach events at local elementary schools with hands-on STEAM activities</li></ul></div><div class="ritem"><div class="head"><strong>Women in Finance</strong><span class="when">Aug 2023 – Jun 2025</span></div><em>Vice President</em><ul><li>Organized monthly financial-literacy meetings and coordinated guest speakers on personal finance and finance careers</li></ul></div><div class="ritem"><div class="head"><strong>Science Alliance Club</strong><span class="when">Aug 2022 – Jun 2025</span></div><em>Mentor</em><ul><li>Mentored fifth-grade students through science-fair research and presentation preparation</li></ul></div></div></div>
+    <div class="rgroup"><h3>Skills &amp; honors</h3><div><div class="ritem"><div class="head"><strong>Technical</strong><span class="when"></span></div><ul><li>Python, Power BI, data analysis, data visualization, machine learning, HTML, Blender, Google Workspace, Microsoft Office</li></ul></div><div class="ritem"><div class="head"><strong>Languages</strong><span class="when"></span></div><ul><li>English (native), Chinese, Spanish</li></ul></div><div class="ritem"><div class="head"><strong>Honors</strong><span class="when"></span></div><ul><li>NASA Outstanding Leadership and Diligence Award</li><li>CSUPOM Conference Student Recognition Award</li><li>AP Scholar with Distinction</li><li>California Eligibility in the Local Context (top 9% of class)</li></ul></div></div></div>
+  </div>
+</section>
 
-  <footer class="bottombar mono">
-    <span>© <span id="year">2026</span> allison zhou</span>
-    <button class="toggle" type="button" id="motion-toggle" aria-pressed="false">motion: on</button>
-    <span class="coords" id="coords">x 000 · y 000</span>
-  </footer>
+<section id="contact" class="contact gutter">
+  <span class="label">05 / Contact · Always up for a coffee chat</span>
+  <p class="mega">Let's<br><span class="accent">talk</span></p>
+  <div class="contact-row">
+    <span class="email" id="email">az578@cornell.edu</span>
+    <div class="socials">
+      <button class="copy" id="copy" type="button">Copy email</button>
+      <a href="https://www.linkedin.com/in/allisonjzhou">LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
 
-  <script src="main.js"></script>
+<footer class="gutter rule">
+  <span>© 2026 Allison Zhou</span>
+  <span>Finding patterns since middle school</span>
+</footer>
+
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root = document.documentElement;
+
+  // contrast toggle
+  const toggle = document.getElementById('toggle');
+  const isLight = () => root.dataset.theme ? root.dataset.theme === 'light' : matchMedia('(prefers-color-scheme: light)').matches;
+  toggle.addEventListener('click', () => {
+    root.dataset.theme = isLight() ? 'dark' : 'light';
+    try { localStorage.setItem('az-theme', root.dataset.theme); } catch (e) {}
+  });
+  try { const t = localStorage.getItem('az-theme'); if (t) root.dataset.theme = t; } catch (e) {}
+
+  // binary field behind the hero: 0s and 1s that light up and flip near the pointer
+  const cv = document.getElementById('field'), ctx = cv.getContext('2d'), hero = cv.parentElement;
+  let cols, rows, cells, cw = 14, ch = 18, mouse = { x: -999, y: -999 };
+  function size() {
+    const dpr = Math.min(2, devicePixelRatio || 1), r = hero.getBoundingClientRect();
+    cv.width = r.width * dpr; cv.height = r.height * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cols = Math.ceil(r.width / cw); rows = Math.ceil(r.height / ch);
+    cells = Array.from({ length: cols * rows }, () => ({ v: Math.random() < .5 ? 0 : 1, heat: 0 }));
+  }
+  size(); addEventListener('resize', size);
+  hero.addEventListener('pointermove', e => { const r = hero.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
+  hero.addEventListener('pointerleave', () => { mouse.x = mouse.y = -999; });
+  const css = n => getComputedStyle(root).getPropertyValue(n).trim();
+  let t0 = 0;
+  function frame(t) {
+    const r = hero.getBoundingClientRect();
+    if (r.bottom > 0) {
+      ctx.clearRect(0, 0, r.width, r.height);
+      ctx.font = '500 12px "IBM Plex Mono", monospace'; ctx.textBaseline = 'top';
+      const muted = css('--muted'), glow = css('--glow');
+      const wave = reduce ? -1 : (t / 14) % (r.width + 400) - 200;
+      for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+        const c = cells[y * cols + x], px = x * cw, py = y * ch;
+        const d = Math.hypot(px - mouse.x, py - mouse.y), dw = Math.abs(px - wave - y * 3);
+        if (d < 120) { c.heat = Math.max(c.heat, 1 - d / 120); if (!reduce && Math.random() < .25) c.v ^= 1; }
+        if (dw < 30) c.heat = Math.max(c.heat, .35 * (1 - dw / 30));
+        if ((x * 7 + y * 13) % 5) continue;
+        ctx.globalAlpha = .1 + c.heat * .9;
+        ctx.fillStyle = c.heat > .2 ? glow : muted;
+        ctx.fillText(c.v, px, py);
+        c.heat *= .94;
+      }
+      ctx.globalAlpha = 1;
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  // count-up on the counters when they scroll into view (the final number is already in the HTML)
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return; io.unobserve(e.target);
+      const el = e.target, end = +el.dataset.count, suf = el.dataset.suffix || '', start = performance.now();
+      const step = n => { const p = Math.min(1, (n - start) / 1200), v = Math.round(end * (1 - Math.pow(1 - p, 3))); el.textContent = v.toLocaleString('en-US') + suf; if (p < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    }), { threshold: .6 });
+    document.querySelectorAll('[data-count]').forEach(el => io.observe(el));
+  }
+
+  // custom cursor on mouse devices
+  const cur = document.getElementById('cursor');
+  if (matchMedia('(pointer: fine)').matches && !reduce) {
+    addEventListener('pointermove', e => { cur.style.opacity = 1; cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px'; });
+    document.addEventListener('pointerover', e => cur.classList.toggle('big', !!e.target.closest('a, button, summary')));
+    document.addEventListener('pointerleave', () => cur.style.opacity = 0);
+  }
+
+
+  // ---------- moving name ----------
+  const words = [...document.querySelectorAll('.hero h1 .word')];
+  const chars = [];
+  words.forEach(w => { const t = w.textContent; w.textContent = ''; [...t].forEach(c => { const s = document.createElement('span'); s.className = 'ch'; s.textContent = c; w.appendChild(s); chars.push(s); }); });
+  let hp = { x: -1e4, y: -1e4 }, hpSmooth = { x: -1e4, y: -1e4 };
+  hero.addEventListener('pointermove', e => { hp.x = e.clientX; hp.y = e.clientY; });
+  hero.addEventListener('pointerleave', () => { hp.x = hp.y = -1e4; });
+  const lines = [...document.querySelectorAll('.hero h1 .line')];
+  function nameFrame(t) {
+    if (!reduce) {
+      hpSmooth.x += (hp.x - hpSmooth.x) * .18; hpSmooth.y += (hp.y - hpSmooth.y) * .18;
+      chars.forEach((c, i) => {
+        const r = c.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+        const d = Math.hypot(cx - hpSmooth.x, cy - hpSmooth.y), near = Math.max(0, 1 - d / 320);
+        const idle = Math.sin(t / 650 + i * .55) * .035;
+        const sy = 1 + idle + near * .32, sx = 1 - near * .12;
+        const ty = -near * 6 + Math.sin(t / 900 + i * .7) * 3;
+        c.style.transform = `translateY(${ty}px) scale(${sx}, ${sy})`;
+        c.classList.toggle('hot', near > .45);
+      });
+      const y = scrollY;
+      lines.forEach(l => { l.style.transform = `translateX(${(+l.dataset.drift) * y * .35}px)`; });
+    }
+    requestAnimationFrame(nameFrame);
+  }
+  requestAnimationFrame(nameFrame);
+
+  // ---------- 3D project carousel ----------
+  const jobs = [...document.querySelectorAll('details.job')];
+  const orbit = document.getElementById('orbit'), stage = document.getElementById('stage'), nowEl = document.getElementById('orbit-now');
+  const N = jobs.length, step = 360 / N;
+  const cards = jobs.map((job, i) => {
+    const title = job.querySelector('h3').textContent, org = job.querySelector('.org').textContent;
+    const tags = [...job.querySelectorAll('.job-body .tag')].slice(0, 3).map(t => `<span>${t.textContent}</span>`).join('');
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'pcard';
+    b.innerHTML = `<span class="code">${job.querySelector('.code').textContent}</span><span class="num">${String(i + 1).padStart(2, '0')}</span><h4>${title}</h4><span class="org">${org}</span><span class="chips">${tags}</span>`;
+    b.setAttribute('aria-label', `${title}, ${org}. Open details.`);
+    b.addEventListener('click', () => { if (dragMoved) return; jobs.forEach(j => j.open = j === job); job.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); });
+    orbit.appendChild(b); return b;
+  });
+  let rot = 0, vel = reduce ? 0 : -.06, target = null, R = 380, dragging = false, dragMoved = false, lastX = 0, idleAuto = !reduce, frontIdx = -1;
+  function layout() {
+    const w = stage.clientWidth, cw = Math.max(200, Math.min(300, w * .62)), chh = cw * 1.3;
+    stage.style.setProperty('--card-w', cw + 'px'); stage.style.setProperty('--card-h', chh + 'px'); stage.style.setProperty('--stage-h', (chh + 110) + 'px');
+    R = Math.round((cw / 2) / Math.tan(Math.PI / N) + 40);
+    orbit.style.transform = `translateZ(${-R}px)`;
+  }
+  layout(); addEventListener('resize', layout);
+  function spinTo(i) { target = -i * step; idleAuto = false; }
+  const mod = (a, n) => ((a % n) + n) % n;
+  function orbitFrame() {
+    if (target !== null) { const diff = target - rot; rot += diff * .12; if (Math.abs(diff) < .05) { rot = target; target = null; } }
+    else if (!dragging) { rot += vel; if (!idleAuto) vel *= .95; if (!idleAuto && Math.abs(vel) < .02) { vel = 0; target = Math.round(rot / step) * step; idleAuto = !reduce; if (idleAuto) setTimeout(() => {}, 0); } }
+    orbit.style.transform = `translateZ(${-R}px) rotateY(${rot}deg)`;
+    cards.forEach((c, i) => {
+      const a = mod(i * step + rot + 180, 360) - 180;
+      c.style.transform = `rotateY(${i * step}deg) translateZ(${R}px)`;
+      c.style.opacity = String(.25 + .75 * Math.max(0, Math.cos(a * Math.PI / 180)));
+    });
+    const f = mod(Math.round(-rot / step), N);
+    if (f !== frontIdx) { frontIdx = f; cards.forEach((c, i) => c.classList.toggle('front', i === f)); nowEl.textContent = `${String(f + 1).padStart(2, '0')} / ${String(N).padStart(2, '0')} · ${jobs[f].querySelector('h3').textContent}`; }
+    requestAnimationFrame(orbitFrame);
+  }
+  requestAnimationFrame(orbitFrame);
+  stage.addEventListener('pointerdown', e => { dragging = true; dragMoved = false; lastX = e.clientX; target = null; idleAuto = false; vel = 0; stage.setPointerCapture(e.pointerId); });
+  stage.addEventListener('pointermove', e => { if (!dragging) return; const dx = e.clientX - lastX; lastX = e.clientX; if (Math.abs(dx) > 1) dragMoved = true; rot += dx * .25; vel = dx * .25; });
+  const endDrag = e => { if (!dragging) return; dragging = false; if (!dragMoved) { const el = document.elementFromPoint(e.clientX, e.clientY); const c = el && el.closest('.pcard'); if (c) c.click(); } setTimeout(() => { dragMoved = false; }, 0); };
+  stage.addEventListener('pointerup', endDrag); stage.addEventListener('pointercancel', endDrag);
+  stage.addEventListener('wheel', e => { if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { e.preventDefault(); target = null; idleAuto = false; vel = -e.deltaX * .05; } }, { passive: false });
+  document.getElementById('prev').addEventListener('click', () => spinTo(Math.round(-rot / step) - 1));
+  document.getElementById('next').addEventListener('click', () => spinTo(Math.round(-rot / step) + 1));
+  // auto-spin resumes after a pause
+  let resume; ['pointerup', 'click'].forEach(ev => stage.parentElement.addEventListener(ev, () => { clearTimeout(resume); if (!reduce) resume = setTimeout(() => { idleAuto = true; vel = -.06; }, 6000); }));
+
+  // ---------- marquee reacts to scroll speed ----------
+  const track = document.querySelector('.marquee-track');
+  let mx = 0, lastY = scrollY, boost = 0;
+  function marqueeFrame() {
+    const dy = scrollY - lastY; lastY = scrollY; boost += (dy - boost) * .1;
+    if (!reduce) { mx -= .6 + boost * .4; const half = track.scrollWidth / 2; if (mx < -half) mx += half; if (mx > 0) mx -= half; track.style.transform = `translateX(${mx}px) skewX(${Math.max(-12, Math.min(12, -boost * .6))}deg)`; }
+    requestAnimationFrame(marqueeFrame);
+  }
+  requestAnimationFrame(marqueeFrame);
+
+  // ---------- section headings slide with scroll ----------
+  const heads = [...document.querySelectorAll('.sec-head h2, .mega')];
+  function headFrame() {
+    if (!reduce) heads.forEach(h => { const r = h.getBoundingClientRect(), p = (r.top + r.height / 2) / innerHeight - .5; h.style.transform = `translateX(${p * -8}vw)`; });
+    requestAnimationFrame(headFrame);
+  }
+  requestAnimationFrame(headFrame);
+
+  // ---------- text scramble on hover ----------
+  const GLYPHS = '01#%&*+<>/\\=_';
+  document.querySelectorAll('nav.top .links a, .label, .socials a, .copy').forEach(el => {
+    if (el.children.length) return;
+    const orig = el.textContent; let raf;
+    el.addEventListener('mouseenter', () => {
+      if (reduce) return; cancelAnimationFrame(raf); let f = 0;
+      const run = () => { f++; el.textContent = [...orig].map((c, i) => c === ' ' ? c : i < f / 1.5 ? orig[i] : GLYPHS[(Math.random() * GLYPHS.length) | 0]).join(''); if (f / 1.5 < orig.length) raf = requestAnimationFrame(run); else el.textContent = el.dataset.live || orig; };
+      run();
+    });
+  });
+
+  // ---------- magnetic button ----------
+  const cta = document.querySelector('.big-cta');
+  if (matchMedia('(pointer: fine)').matches && !reduce) {
+    cta.addEventListener('pointermove', e => { const r = cta.getBoundingClientRect(); cta.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .3}px, ${(e.clientY - r.top - r.height / 2) * .4}px)`; });
+    cta.addEventListener('pointerleave', () => cta.style.transform = '');
+  }
+
+  // copy email
+  const copy = document.getElementById('copy'), email = document.getElementById('email');
+  copy.addEventListener('click', () => {
+    const done = () => { copy.textContent = 'Copied'; setTimeout(() => copy.textContent = 'Copy email', 1600); };
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(email); const s = getSelection(); s.removeAllRanges(); s.addRange(r); copy.textContent = 'Selected'; };
+    try { navigator.clipboard.writeText(email.textContent).then(done, fallback); } catch (e) { fallback(); }
+  });
+})();
+</script>
+
 </body>
 </html>
